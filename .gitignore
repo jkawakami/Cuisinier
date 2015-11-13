@@ -1,3 +1,7 @@
+# Spyder
+.spyderproject
+.spyderworkspace
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
