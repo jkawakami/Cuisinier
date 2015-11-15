@@ -25,7 +25,7 @@ class Cuisinier:
     @param  recipe  ClassifiedRecipe Recipe to be added
     @return         True if successful, false otherwise
     """
-    def addRecipe(self, recipe: ClassifiedRecipe):
+    def addRecipe(self, recipe, ClassifiedRecipe):
         if not isinstance(recipe, ClassifiedRecipe):
             raise TypeError("Cuisinier.addRecipe() takes a ClassifiedRecipe")
 
@@ -85,7 +85,7 @@ class Cuisinier:
     @param  recipe  Recipe to be classified
     @return         ClassfiedRecipe
     """
-    def classifyRecipe(self, recipe: Recipe):
+    def classifyRecipe(self, recipe, Recipe):
         if not isinstance(recipe, Recipe):
             raise TypeError("Cuisinier.classifyRecipe() takes a Recipe")
 
