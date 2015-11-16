@@ -19,6 +19,7 @@ class Cuisinier:
         self.cuisineMatrix = {}  # <cuisine, <ingredient, frequency>>
         self.ingredientCount = {}  # <ingredient, frequency>
         self.ingredientMatrix = {}  # <ingredient, <cuisine, frequency>>
+        self.preprocessed = False
 
     """
     Adds a ClassifiedRecipe to the knowledge base.
@@ -63,6 +64,7 @@ class Cuisinier:
 
             # Return true if successful
             logging.info("Add recipe " + str(recipe.id) + ":\tSUCCESS")
+            self.preprocessed = False
             return True
 
         logging.info("Add recipe " + str(recipe.id) + ":\tFAIL")
@@ -81,6 +83,13 @@ class Cuisinier:
         logging.info(str(success) + "/" + str(len(recipes)) + " recipes added")
 
     """
+    Run any preprocessing necessary before classification after any change to
+    the knowledgebase.
+    """
+    def preprocess(self):
+        self.preprocessed = True
+
+    """
     Classifies a given Recipe.
     @param  recipe  Recipe to be classified
     @return         ClassfiedRecipe
@@ -91,6 +100,10 @@ class Cuisinier:
 
         # TODO Perform classification
         return ClassifiedRecipe(recipe.id, "unknown", recipe.ingredients)
+        # Run preprocessing if necessary
+        if not self.preprocessed:
+            self.preprocess()
+
 
     """
     Classifies a list of Recipes.
