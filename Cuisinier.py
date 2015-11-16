@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 
 Recipe = namedtuple("ClassifiedRecipe", "id, ingredients")
@@ -13,6 +14,8 @@ Uses ingredients to categorize the cuisine of a recipe.
 
 
 class Cuisinier:
+    __metaclass__ = ABCMeta
+
     def __init__(self):
         self.recipes = {}  # <id, Recipe>
         self.cuisineCount = {}  # <cuisine, frequency>
@@ -86,8 +89,19 @@ class Cuisinier:
     Run any preprocessing necessary before classification after any change to
     the knowledgebase.
     """
+    @abstractmethod
     def preprocess(self):
         self.preprocessed = True
+
+    """
+    Classifies a given Recipe (called by classifyRecipe() after preprocessing).
+    @param  recipe  Recipe to be classified
+    @return         ClassfiedRecipe
+    """
+    @abstractmethod
+    def classify(self, recipe: Recipe):
+        # TODO Perform classification
+        return ClassifiedRecipe(recipe.id, "unknown", recipe.ingredients)
 
     """
     Classifies a given Recipe.
@@ -98,12 +112,11 @@ class Cuisinier:
         if not isinstance(recipe, Recipe):
             raise TypeError("Cuisinier.classifyRecipe() takes a Recipe")
 
-        # TODO Perform classification
-        return ClassifiedRecipe(recipe.id, "unknown", recipe.ingredients)
         # Run preprocessing if necessary
         if not self.preprocessed:
             self.preprocess()
 
+        return self.classify(recipe)
 
     """
     Classifies a list of Recipes.

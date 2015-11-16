@@ -3,9 +3,7 @@
 import json
 import logging
 
-from Cuisinier import Recipe
-from Cuisinier import ClassifiedRecipe
-from Cuisinier import Cuisinier
+from Cuisinier import Recipe, ClassifiedRecipe, Cuisinier
 
 LOGGING_LEVEL = logging.INFO
 TRAINING_FILE = "resources/train.json"
