@@ -4,6 +4,7 @@ import json
 import logging
 
 from Cuisinier import Recipe, ClassifiedRecipe, Cuisinier
+from CuisinierTDIDF import CuisinierTDIDF
 
 LOGGING_LEVEL = logging.INFO
 TRAINING_FILE = "resources/train.json"
@@ -32,7 +33,7 @@ def getRecipes(file):
 def selfTest():
     # Read and parse JSON data
     recipes = getClassifiedRecipes(TRAINING_FILE)
-    cuisinier = Cuisinier()
+    cuisinier = CuisinierTDIDF()
     cuisinier.addRecipes(recipes)
 
     success = 0
